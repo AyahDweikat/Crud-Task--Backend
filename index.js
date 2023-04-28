@@ -5,15 +5,12 @@ const app = express();
 let PORT = 3000;
 app.use(express.json())
 
-
 // create the connection to database
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   database: 'task2'
 });
-
-
 
 app.get('/allUsers',(req,res)=>{
     let sql = `SELECT * FROM workers`;
@@ -54,7 +51,6 @@ app.patch('/updateUserEmail', (req, res)=>{
         if(err){
             return res.json({message:'error in sql', err})
         }
-        if(result.affectedRows == 0) return res.json({message:'User not found'})
         return res.json({message:'User email updated successfully', result})
     })
 })
@@ -66,7 +62,6 @@ app.patch('/updateUserName', (req, res)=>{
         if(err){
             return res.json({message:'error in sql', err})
         }
-        if(result.affectedRows == 0) return res.json({message:'User not found'})
         return res.json({message:'User name updated successfully', result})
     })
 })
@@ -78,11 +73,9 @@ app.patch('/updateUserSalary/:id', (req, res)=>{
         if(err){
             return res.json({message:'error in sql', err})
         }
-        if(result.affectedRows == 0) return res.json({message:'User not found'})
         return res.json({message:'User salary updated successfully', result})
     })
 })
-
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`);
 })
